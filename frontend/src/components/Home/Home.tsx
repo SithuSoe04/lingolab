@@ -1,8 +1,26 @@
+import React, {useState} from "react";
+import PdfViewer from "../PdfViewer/PdfViewer";
+
 const Home = () => {
+const [pdfFile, setPdfFile] = useState<string | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const fileUrl = URL.createObjectURL(file);
+      setPdfFile(fileUrl);
+    }
+  };
   return (
-    <h1>
-        HOME PAGE
-    </h1>
+    <div>
+      <input
+        type="file"
+        accept="application/pdf"
+        onChange={handleFileChange}
+        className="mb-4"
+      />
+      {pdfFile && <PdfViewer fileUrl={pdfFile} />}
+    </div>
   );
 };
 export default Home;
