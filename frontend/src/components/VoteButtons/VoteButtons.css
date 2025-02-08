@@ -1,0 +1,29 @@
+/* VoteButtons.css */
+.vote-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .vote-button-container {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+  }
+  
+  .vote-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .vote-icon:hover {
+    opacity: 0.8;
+  }
+  
+  .vote-count {
+    margin-left: 0.25rem;
+    font-size: 1.125rem;
+  }
