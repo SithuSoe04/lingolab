@@ -17,6 +17,7 @@ import gpt_prompts
 import json
 from dotenv import load_dotenv
 from vocabulary_operations import *
+from request_operations import *
 
 load_dotenv()
 
@@ -259,3 +260,25 @@ async def generate_singular_definition(field_type: str, search_term: str):
     dataObject = {"type": field_type, "words": { "word": search_term, "definition": definition, "context": "Currently unavailable" }}
     upload_vocabulary_data(dataObject)
     return dataObject
+
+
+@app.post("/process-definition-request/{request_id}/{approve}")
+async def process_definition_request_api(request_id: str, approve: bool):
+    """Endpoint to approve or reject a definition change request."""
+    try:
+        success = process_definition_request(request_id, approve)
+        if success:
+            return {"status": "success", "message": f"Request {request_id} processed"}
+        else:
+            raise HTTPException(status_code=400, detail=f"Request {request_id} could not be processed.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/pending-requests/")
+async def get_pending_requests_api():
+    """Endpoint to get all pending definition change requests."""
+    try:
+        requests = get_pending_requests()
+        return {"status": "success", "data": requests}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

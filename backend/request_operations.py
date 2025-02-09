@@ -108,13 +108,9 @@ def process_definition_request(request_id, approve=True):
             })
             print(f"Updated definition for {request_data['word']}")
         
-        # Update the request status
-        request_ref.update({
-            'status': new_status,
-            'processed_at': datetime.now()
-        })
-        
-        print(f"Request {request_id} has been {new_status}")
+ # Delete the request document after processing
+        request_ref.delete()
+        print(f"Request {request_id} has been {'approved' if approve else 'rejected'} and deleted.")
         return True
         
     except Exception as error:

@@ -10,6 +10,7 @@ import FileExplorer from './components/FileExplorer/FileExplorer';
 import Definitions from './components/Definitions/Definitions';
 import ResearchList from './components/ResearchList/ResearchList';
 import VoteButtons from './components/VoteButtons/VoteButtons';
+import DefinitionChanges from './components/DefinitionChanges/DefinitionChanges';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/research" element={<ResearchList/>} />
           <Route path="/buttons" element={<VoteButtons/>} />
           <Route path="/definitions" element={<Definitions/>} />
+          <Route path="/definitionschanges" element={<DefinitionChanges/>} />
         </Routes>
     </Router>
   );
