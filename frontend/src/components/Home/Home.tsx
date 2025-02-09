@@ -24,50 +24,47 @@ const Home = () => {
             <img src={Overall_Model4} style={styles.demoImg}></img>
           </Grid>
           <Grid item sm={5}>
-          <h2 style={styles.subtitle}>
-            Why Use LingoLab?
-          </h2>
-          <List style={styles.list}>
-      <ListItem style={styles.listItem}>
-        <ListItemText
-          primary="Instantly Understand Complex Terms"
-          secondary="No more searching through multiple sources."
-          primaryTypographyProps={{ style: styles.primaryText }}
-          secondaryTypographyProps={{ style: styles.secondaryText }}
-        />
-      </ListItem>
-      <ListItem style={styles.listItem}>
-        <ListItemText
-          primary="AI-Powered, Human-Refined"
-          secondary="Cutting-edge AI generates definitions, and experts improve them."
-          primaryTypographyProps={{ style: styles.primaryText }}
-          secondaryTypographyProps={{ style: styles.secondaryText }}
-        />
-      </ListItem>
-      <ListItem style={styles.listItem}>
-        <ListItemText
-          primary="Built for the STEM Community"
-          secondary="A collaborative platform where knowledge evolves."
-          primaryTypographyProps={{ style: styles.primaryText }}
-          secondaryTypographyProps={{ style: styles.secondaryText }}
-        />
-      </ListItem>
-      <ListItem style={styles.listItem}>
-        <ListItemText
-          primary="Free & Open-Source"
-          secondary="Contribute to a global dictionary of technical terms."
-          primaryTypographyProps={{ style: styles.primaryText }}
-          secondaryTypographyProps={{ style: styles.secondaryText }}
-        />
-      </ListItem>
-    </List>
+            <h2 style={styles.subtitle}>
+              Why Use LingoLab?
+            </h2>
+            <List style={styles.list}>
+              <ListItem style={styles.listItem}>
+                <ListItemText
+                  primary="Instantly Understand Complex Terms"
+                  secondary="No more searching through multiple sources."
+                  primaryTypographyProps={{ style: styles.primaryText }}
+                  secondaryTypographyProps={{ style: styles.secondaryText }}
+                />
+              </ListItem>
+              <ListItem style={styles.listItem}>
+                <ListItemText
+                  primary="AI-Powered, Human-Refined"
+                  secondary="Cutting-edge AI generates definitions, and experts improve them."
+                  primaryTypographyProps={{ style: styles.primaryText }}
+                  secondaryTypographyProps={{ style: styles.secondaryText }}
+                />
+              </ListItem>
+              <ListItem style={styles.listItem}>
+                <ListItemText
+                  primary="Built for the STEM Community"
+                  secondary="A collaborative platform where knowledge evolves."
+                  primaryTypographyProps={{ style: styles.primaryText }}
+                  secondaryTypographyProps={{ style: styles.secondaryText }}
+                />
+              </ListItem>
+              <ListItem style={styles.listItem}>
+                <ListItemText
+                  primary="Free & Open-Source"
+                  secondary="Contribute to a global dictionary of technical terms."
+                  primaryTypographyProps={{ style: styles.primaryText }}
+                  secondaryTypographyProps={{ style: styles.secondaryText }}
+                />
+              </ListItem>
+            </List>
           </Grid>
         </Grid>
 
       {/* Footer Section */}
-      <Typography variant="body2" color="textSecondary" align="center" sx={{ mt: 6 }}>
-        Contact Us at the bottom (if time permits)
-      </Typography>
     </Container>
   );
 }
