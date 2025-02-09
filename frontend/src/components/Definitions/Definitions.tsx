@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import VoteButtons from '../VoteButtons/VoteButtons';
 // Types
 interface Definition {
     word: string;
@@ -81,8 +82,9 @@ interface Definition {
     margin-top: 12px;
   }
   
-  .vote-button {
+  .vote-buttons {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     gap: 4px;
     background: none;
@@ -160,15 +162,7 @@ interface Definition {
                     <div className="section-title">/Context/</div>
                     <div>{def.context}</div>
                   </div>
-                  
-                  <div className="votes">
-                    <button className="vote-button">
-                      👍 <span className="vote-count">{def.votes.up}</span>
-                    </button>
-                    <button className="vote-button">
-                      👎 <span className="vote-count">{def.votes.down}</span>
-                    </button>
-                  </div>
+                 <div className="vote-buttons"><VoteButtons /></div> 
                 </div>
               ))
             )}
