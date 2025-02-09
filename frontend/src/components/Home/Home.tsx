@@ -1,10 +1,14 @@
 import { Box, Card, Button, Grid, CardContent, Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 import { tempStyles } from './styles';
 import Overall_Model4 from '../../imgs/Overall_Model4.png';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router';
+import axios from 'axios';
 
 const Home = () => {
   const styles = tempStyles();
   // Data for the cards
+
   const cardData = [
     {
       primary: "Instantly Understand Complex Terms",
@@ -28,7 +32,7 @@ const Home = () => {
     },
   ]; 
   return (
-    <Container maxWidth={false} sx={{padding: '50px'}}>
+    <Container maxWidth={false} sx={{padding: '50px', marginTop: '4rem'}}>
       {/* Introduction section */}
       <Grid>
         <h1 style={styles.title}>
@@ -38,7 +42,9 @@ const Home = () => {
         LingoLab is an innovative, AI-powered dictionary designed specifically for researchers, students, and professionals in science, technology, engineering, and mathematics (STEM). Our mission is to simplify the process of understanding complex technical terms and concepts, making it easier for you to navigate the ever-expanding world of STEM literature. With LingoLab, you can simply upload a PDF of a research paper, article, or textbook, and our advanced AI will automatically extract and define technical terms, saving you time and effort. Whether you're a seasoned researcher or a student just starting out, LingoLab is here to help you understand dense material faster than ever before.
         </p>
         <Button style={styles.butt}>
-          Try it out!
+            <Link style={{ textDecoration: "none", color: "inherit" }} to='/fileexplorer'>
+                Try it out!
+            </Link>
         </Button>
       </Grid>
 

@@ -1,64 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import ResearchList from '../ResearchList/ResearchList';
-
-const styles = `
-.file-upload-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem;
-}
-
-.upload-button-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.upload-button {
-  background-color: #D3D3D3;
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 2rem;
-  font-family: monospace;
-  font-size: 1.5rem;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: background-color 0.2s;
-}
-
-.upload-button:hover {
-  background-color: #C0C0C0;
-}
-
-.upload-icon {
-  width: 1.2em;
-  height: 1.2em;
-}
-
-.file-input {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.divider {
-  width: 100%;
-  height: 1px;
-  background-color: #E0E0E0;
-  margin: 2rem 0;
-}
-`;
 
 const FileExplorer = () => {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -97,14 +40,75 @@ const FileExplorer = () => {
   };
 
   return (
-    <Box>
-      <input type="file" accept="application/pdf" onChange={handleFileChange} className="mb-4" />
+    // <Box sx={{marginTop: '6rem'}}>
+    //   <input type="file" accept="application/pdf" onChange={handleFileChange} className="mb-4" />
+    //   {pdfFile && (
+    //     <Button onClick={handleUpload} disabled={uploading} variant="contained" color="primary">
+    //       {uploading ? "Uploading..." : "Upload & View"}
+    //     </Button>
+    //   )}
+    // </Box>
+    <Box 
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh",
+      backgroundColor: "#f4f4f4"
+    }}
+  >
+    <Paper 
+      elevation={6}
+      sx={{
+        width: "400px",
+        padding: "2rem",
+        borderRadius: "1rem",
+        textAlign: "center",
+        backgroundColor: "white",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)"
+      }}
+    >
+      <Typography variant="h4" fontWeight="bold" gutterBottom>
+        Upload a PDF
+      </Typography>
+      <Box 
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <input 
+        type="file" 
+        accept="application/pdf" 
+        onChange={handleFileChange} 
+        style={{
+          fontSize: "1rem", 
+          textAlign: "center", 
+          width: "100%", 
+          padding: "0.5rem", 
+          borderRadius: "0.5rem",
+          border: "1px solid #ccc", 
+        }} 
+      />
+    </Box>
       {pdfFile && (
-        <Button onClick={handleUpload} disabled={uploading} variant="contained" color="primary">
+        <Button 
+          onClick={handleUpload} 
+          disabled={uploading} 
+          variant="contained" 
+          color="primary" 
+          sx={{ 
+            marginTop: "1.5rem", 
+            fontSize: "1rem", 
+            padding: "0.75rem 2rem" 
+          }}
+        >
           {uploading ? "Uploading..." : "Upload & View"}
         </Button>
       )}
-    </Box>
+    </Paper>
+  </Box>
   );
 };
 
