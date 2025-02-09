@@ -37,10 +37,12 @@ interface Definition {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    font-family: 'Anonymous Pro', monospace;
   }
   
   .empty-state {
     color: #666;
+    font-family: 'Anonymous Pro', monospace;
     text-align: center;
     font-style: italic;
     padding: 20px;
@@ -58,6 +60,7 @@ interface Definition {
   
   .word {
     font-size: 1.2em;
+    font-family: 'Anonymous Pro', monospace;
     font-weight: bold;
     margin-bottom: 8px;
     border-bottom: 2px solid #333;
@@ -69,6 +72,7 @@ interface Definition {
   }
   
   .section-title {
+    font-family: 'Anonymous Pro', monospace;
     font-style: italic;
     color: #666;
     margin-bottom: 4px;
@@ -120,7 +124,7 @@ interface Definition {
       {
         id: '1',
         word: 'Example',
-        definition: 'A representative form or pattern',
+        definition: 'A representative form or pattern.',
         context: 'This is an example of how the definition block will look.',
         votes: { up: 10, down: 10 }
       }
