@@ -34,7 +34,6 @@ const DefinitionCard: React.FC<DefinitionCardProps> = ({
     try {
       const response = await axios.post(`http://localhost:8000/process-definition-request/${id}/${approve}`);
       if (response.data.status === "success") {
-        alert(`Request ${id} processed successfully.`);
         refreshRequests(); // Refresh the list of requests
       }
     } catch (error) {

@@ -1,6 +1,6 @@
 import { Box, Card, Button, Grid, CardContent, Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 import { tempStyles } from './styles';
-import Overall_Model4 from '../../imgs/Overall_Model4.png';
+import sample from '../../imgs/sample.png';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import axios from 'axios';
@@ -120,7 +120,7 @@ const Home = () => {
         </Grid>
         <Grid item sm={7}>
           <div style={styles.demoImg}>
-            <img src={Overall_Model4} style={{maxWidth:'100%'}}></img>
+            <img src={sample} style={{maxWidth:'100%'}}></img>
           </div>
         </Grid>
       </Grid>

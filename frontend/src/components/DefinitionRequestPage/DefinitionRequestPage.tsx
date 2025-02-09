@@ -51,7 +51,6 @@ const DefinitionRequestPage: React.FC = () => {
   
       const result = await response.json();
       if (response.ok) {
-        alert(result.message); // Show success message
         navigate('/');
       } else {
         throw new Error(result.detail || 'Failed to submit request');

@@ -38,7 +38,7 @@ const DefinitionChanges = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Typography variant="h3" component="h1" sx={{ mb: 4, fontWeight: "bold" }}>
+      <Typography variant="h3" component="h1" sx={{ mb: 4, fontWeight: "bold", paddingTop: '50px' }}>
         Definition Change Requests
       </Typography>
 
