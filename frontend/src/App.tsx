@@ -7,21 +7,25 @@ import LogIn from './components/LogIn/LogIn';
 import PdfViewer from './components/PdfViewer/PdfViewer';
 import Navbar from "./components/Navbar/Navbar"
 import FileExplorer from './components/FileExplorer/FileExplorer';
+import Definitions from './components/Definitions/Definitions';
+import ResearchList from './components/ResearchList/ResearchList';
+import VoteButtons from './components/VoteButtons/VoteButtons';
+
 
 function App() {
   return (
-    <div>
-      <Router>
-        <Navbar/>
-          <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/login" element={<LogIn/>} />
-            <Route path="/pdfviewer" element={<PdfViewer/>} />
-            <Route path="/fileexplorer" element={<FileExplorer/>} />
-            {/* <Route path="/howitworks" element={<Home/>} /> */}
-          </Routes>
-      </Router>
-    </div>
+    <Router>
+      <Navbar/>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/login" element={<LogIn/>} />
+          <Route path="/pdfviewer" element={<PdfViewer/>} />
+          <Route path="/fileexplorer" element={<FileExplorer/>} />
+          <Route path="/research" element={<ResearchList/>} />
+          <Route path="/buttons" element={<VoteButtons/>} />
+          <Route path="/definitions" element={<Definitions/>} />
+        </Routes>
+    </Router>
   );
 }
 
