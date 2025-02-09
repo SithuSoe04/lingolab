@@ -9,6 +9,7 @@
     font-weight: bold;
     text-align: center;
     margin-bottom: 24px;
+    font-family: 'Anonymous Pro', monospace;
   }
   
   .research-list {
@@ -23,6 +24,8 @@
     padding: 16px 24px;
     font-size: 1.125rem;
     font-weight: 500;
+    font-family: 'Anonymous Pro', monospace;
+    font-weight: bold;
     background-color: #d1d1d1;
     border: none;
     color: white;
