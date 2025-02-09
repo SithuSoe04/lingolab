@@ -11,6 +11,7 @@ import Definitions from './components/Definitions/Definitions';
 import ResearchList from './components/ResearchList/ResearchList';
 import VoteButtons from './components/VoteButtons/VoteButtons';
 import DefinitionChanges from './components/DefinitionChanges/DefinitionChanges';
+import DefinitionRequestPage from './components/DefinitionRequestPage/DefinitionRequestPage';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/buttons" element={<VoteButtons/>} />
           <Route path="/definitions" element={<Definitions/>} />
           <Route path="/definitionschanges" element={<DefinitionChanges/>} />
+          <Route path="/request-change" element={<DefinitionRequestPage/>} />
         </Routes>
     </Router>
   );
