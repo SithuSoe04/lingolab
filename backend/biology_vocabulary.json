@@ -1,0 +1,33 @@
+{
+  "type": "biology",
+  "words": [
+    {
+      "word": "DNA",
+      "definition": "Deoxyribonucleic acid, the carrier of genetic information.",
+      "context": "DNA contains the instructions an organism needs to develop, live and reproduce.",
+      "upvotes": 0,
+      "downvotes": 0
+    },
+    {
+      "word": "Mitochondria",
+      "definition": "An organelle that produces cellular energy through ATP synthesis.",
+      "context": "Mitochondria generate most of the cell's supply of ATP, used as a source of chemical energy.",
+      "upvotes": 9,
+      "downvotes": 9
+    },
+    {
+      "word": "Nucleus",
+      "definition": "The central and most important part of a cell, containing the genetic material.",
+      "context": "The nucleus regulates gene expression and mediates the replication of DNA during the cell cycle.",
+      "upvotes": 0,
+      "downvotes": 0
+    },
+    {
+      "word": "Photosynthesis",
+      "definition": "Process by which plants convert light energy into chemical energy",
+      "context": "Plants use photosynthesis to produce glucose from sunlight",
+      "upvotes": 0,
+      "downvotes": 0
+    }
+  ]
+}

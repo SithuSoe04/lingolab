@@ -261,41 +261,41 @@ def remove_vote(field_type, word_id, vote_type):
         raise error
 
 # Example usage
-if __name__ == "__main__":
-    # Example biology terms
-    biology_data = {
-        "type": "biology",
-        "words": [
-            {
-                "word": "Mitochondria",
-                "definition": "The powerhouse of the cell, responsible for producing energy.",
-                "context": "Mitochondria generate most of the cell's supply of ATP, used as a source of chemical energy."
-            }
-        ]
-    }
+# if __name__ == "__main__":
+#     # Example biology terms
+#     biology_data = {
+#         "type": "biology",
+#         "words": [
+#             {
+#                 "word": "Mitochondria",
+#                 "definition": "The powerhouse of the cell, responsible for producing energy.",
+#                 "context": "Mitochondria generate most of the cell's supply of ATP, used as a source of chemical energy."
+#             }
+#         ]
+#     }
     
-    # Upload word
-    result = upload_vocabulary_data(biology_data)
+#     # Upload word
+#     result = upload_vocabulary_data(biology_data)
     
-    # Example of voting
-    word_id = "mitochondria"  # This is the generated doc_id from the word
-    update_vote("biology", word_id, "upvote")
-    update_vote("biology", word_id, "upvote")
-    update_vote("biology", word_id, "downvote")
+#     # Example of voting
+#     word_id = "mitochondria"  # This is the generated doc_id from the word
+#     update_vote("biology", word_id, "upvote")
+#     update_vote("biology", word_id, "upvote")
+#     update_vote("biology", word_id, "downvote")
     
-    # Example of removing votes
-    remove_vote("biology", word_id, "upvote")
+#     # Example of removing votes
+#     remove_vote("biology", word_id, "upvote")
 
-    biology_terms = {
-    "type": "biology",
-    "words": [
-        {
-            "word": "Photosynthesis",
-            "definition": "Process by which plants convert light energy into chemical energy",
-            "context": "Plants use photosynthesis to produce glucose from sunlight"
-        }
-    ]
-}
-search_vocabulary_in_field("biology", "photo")
-export_vocabulary_by_field("biology", "biology_vocabulary")
+#     biology_terms = {
+#     "type": "biology",
+#     "words": [
+#         {
+#             "word": "Photosynthesis",
+#             "definition": "Process by which plants convert light energy into chemical energy",
+#             "context": "Plants use photosynthesis to produce glucose from sunlight"
+#         }
+#     ]
+# }
+# search_vocabulary_in_field("biology", "photo")
+# export_vocabulary_by_field("biology", "biology_vocabulary")
 

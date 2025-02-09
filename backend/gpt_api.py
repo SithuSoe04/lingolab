@@ -11,10 +11,12 @@ import openai
 import os
 import fitz
 import logging
+from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 import gpt_prompts
 import json
 from dotenv import load_dotenv
+from vocabulary_operations import *
 
 load_dotenv()
 
@@ -78,7 +80,7 @@ async def generate_definition(pdf_file: PDF_File):
                         "parameters": {
                             "type": "object",
                             "properties": {
-                                "discipline": {
+                                "type": {
                                     "type": "string",
                                     "enum": ["mathematics", "chemistry", "physics", "computer science", "biology"],
                                     "description": "The scientific discipline that the PDF belongs to. Must be exactly one of: mathematics, chemistry, physics, computer science, or biology."
@@ -140,13 +142,14 @@ async def upload_pdf(file: UploadFile = File(...)):
         chunks = chunk_text(extracted_text)
         
         all_words = [] 
-
+        discipline = ""
         for chunk in chunks:
             response = await generate_definition(PDF_File(pdf_string=chunk))
 
             if response and response["response"]:
                 words = response["response"].get("words", [])  # Extract words
                 all_words.extend(words)  # ✅ Merge words into a single list
+                discipline = response["response"].get("type")
             else:
                 logger.warning(f"Skipping empty response for chunk: {chunk[:100]}...")
 
@@ -155,8 +158,58 @@ async def upload_pdf(file: UploadFile = File(...)):
         logger.info("====="*8)
         logger.info("====="*8)
         logger.info("====="*8)
-        return {"type": "data", "words": all_words}
+        dataObject = {"type": discipline, "words": all_words}
+        upload_vocabulary_data(dataObject)
+        return {"type": discipline, "words": all_words}
 
     except Exception as e:
         logger.error(f"File upload error: {e}")
         raise HTTPException(status_code=500, detail="Error processing uploaded PDF")
+
+
+class VocabularyData(BaseModel):
+    type: str
+    words: List[dict]
+
+# Example: Upload vocabulary data
+@app.post("/upload-vocabulary")
+async def upload_vocabulary(data: VocabularyData):
+    try:
+        result = upload_vocabulary_data(data.dict())
+        return {"status": "success", "data": result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Example: Search vocabulary
+@app.get("/search-vocabulary/{field_type}/{search_term}")
+async def search_vocabulary(field_type: str, search_term: str):
+    try:
+        result = search_vocabulary_in_field(field_type, search_term)
+        return {"status": "success", "data": result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Example: Export vocabulary data
+@app.get("/export-vocabulary/{field_type}")
+async def export_vocabulary(field_type: str, output_file: str = None):
+    try:
+        result = export_vocabulary_by_field(field_type, output_file)
+        return {"status": "success", "data": result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/vocabulary/{field_type}")
+async def get_vocabulary_by_field(field_type: str):
+    try:
+        # Retrieve all vocabulary entries for the specified field type
+        vocabulary = get_all_vocabulary_by_field(field_type)
+        
+        if not vocabulary:
+            raise HTTPException(status_code=404, detail="No vocabulary found for this field type.")
+        
+        return {"status": "success", "data": vocabulary}
+    
+    except Exception as e:
+        logger.error(f"Error retrieving vocabulary for {field_type}: {e}")
+        raise HTTPException(status_code=500, detail="Error retrieving vocabulary data.")
+
