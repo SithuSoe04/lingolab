@@ -5,7 +5,7 @@
 
 
 
-from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi import FastAPI, HTTPException, UploadFile, File, Request
 from pydantic import BaseModel
 import openai
 import os
@@ -281,5 +281,29 @@ async def get_pending_requests_api():
     try:
         requests = get_pending_requests()
         return {"status": "success", "data": requests}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/submit-definition-request")
+async def submit_definition_request_api(request: Request):
+    """
+    Endpoint to submit a definition change request.
+    """
+    try:
+        data = await request.json()  # Parse raw JSON request
+        success = submit_definition_request(
+            word=data["word"],
+            current_definition=data["currentDefinition"],
+            new_definition=data["newDefinition"],
+            field_type=data["fieldType"],
+            current_upvotes=data["currentUpvotes"],
+            current_downvotes=data["currentDownvotes"]
+        )
+        
+        if success:
+            return {"status": "success", "message": "Definition change request submitted successfully!"}
+        else:
+            raise HTTPException(status_code=400, detail="A pending request for this word already exists.")
+    
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
