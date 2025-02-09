@@ -66,7 +66,7 @@ async def generate_definition(pdf_file: PDF_File):
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
-                {"role": "system", "content": "You are an AI assistant that analyzes text from documents to identify difficult words and provide their definitions and context. Your output should be a structured list of words along with their definitions and context."},
+                {"role": "system", "content": "You are an amateur research assistant that analyzes text from documents to identify difficult or technical words and provide their definitions and context. Your output should be a structured list of words along with their definitions and context."},
                 {"role": "user", "content": gpt_prompts.COMMON_PROMPT + f"""---Parsed PDF File Text: {pdf_file.pdf_string}---"""}
             ],
             tools=[
@@ -99,7 +99,7 @@ async def generate_definition(pdf_file: PDF_File):
                                             },
                                             "context": {
                                                 "type": "string",
-                                                "description": "A sentence or phrase from the text that includes the word to provide context."
+                                                "description": "A detailed explanation of how the word is used in the document. Do NOT simply copy a sentence where it appears; instead, describe its role in the discussion."
                                             }
                                         },
                                         "required": ["word", "definition", "context"]

@@ -9,7 +9,7 @@ url = "http://localhost:8000/upload-pdf/"
 pdf_path = "test/test.pdf"  # Replace with an actual file path
 
 # Output JSON file path
-output_json_path = "response.json"
+output_json_path = "test/response.json"
 
 # Open the file in binary mode
 with open(pdf_path, "rb") as file:
