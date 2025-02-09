@@ -1,0 +1,360 @@
+{
+    "type": "data",
+    "words": [
+        {
+            "word": "Text-to-SQL",
+            "definition": "A technology that converts natural language questions into executable SQL commands, allowing users to interact with databases without SQL knowledge.",
+            "context": "Text-to-SQL, as a bridge between human language and machine-readable structured query languages, is crucial for many use cases, converting natural language questions into executable SQL commands."
+        },
+        {
+            "word": "LLM",
+            "definition": "Large Language Model, a type of artificial intelligence model designed to understand and generate human language.",
+            "context": "In tackling the challenges of large language model (LLM) performance for Text-to-SQL tasks, we introduce CHASE-SQL, a new framework."
+        },
+        {
+            "word": "divide-and-conquer method",
+            "definition": "A strategy that breaks down a complex problem into smaller, more manageable parts to solve it more efficiently.",
+            "context": "a divide-and-conquer method that decomposes complex queries into manageable sub-queries in a single LLM call."
+        },
+        {
+            "word": "chain-of-thought reasoning",
+            "definition": "A process that involves following a logical sequence of thoughts or steps to reach a conclusion, similar to how a database engine executes queries.",
+            "context": "chain-of-thought reasoning based on query execution plans, reflecting the steps a database engine takes during execution."
+        },
+        {
+            "word": "instance-aware synthetic example generation",
+            "definition": "A technique that generates specific examples tailored to particular test questions, enhancing the learning process.",
+            "context": "a unique instance-aware synthetic example generation technique, which offers specific few-shot demonstrations tailored to test questions."
+        },
+        {
+            "word": "pairwise comparisons",
+            "definition": "A method of comparing entities in pairs to judge which is preferable or has a certain property.",
+            "context": "a selection agent is employed to rank the candidates through pairwise comparisons with a fine-tuned binary-candidates selection LLM."
+        },
+        {
+            "word": "fine-tuned",
+            "definition": "The process of making small adjustments to a model to improve its performance on specific tasks.",
+            "context": "pairwise comparisons with a fine-tuned binary-candidates selection LLM."
+        },
+        {
+            "word": "state-of-the-art",
+            "definition": "The highest level of development or achievement in a particular field at a given time.",
+            "context": "our proposed CHASE-SQL achieves the state-of-the-art execution accuracy of 73.0 % and 73.01% on the test set and development set."
+        },
+        {
+            "word": "BIRD Text-to-SQL dataset benchmark",
+            "definition": "A standard dataset used to evaluate the performance of Text-to-SQL systems.",
+            "context": "the notable BIRD Text-to-SQL dataset benchmark, rendering CHASE-SQL the top submission of the leaderboard."
+        },
+        {
+            "word": "schema",
+            "definition": "A structured framework or plan that outlines the organization of a database, including the tables and relationships between them.",
+            "context": "the contextual information potentially including the database schema, its metadata and along with the values."
+        },
+        {
+            "word": "metadata",
+            "definition": "Data that provides information about other data, such as the structure, operations, and constraints of a database.",
+            "context": "the contextual information potentially including the database schema, its metadata and along with the values."
+        },
+        {
+            "word": "zero-/few-shot prompting",
+            "definition": "A method in machine learning where a model is trained with few or no examples of the task it needs to perform.",
+            "context": "generating candidates using zero-/few-shot or open-ended prompting, followed by selecting the best options utilizing self-consistency."
+        },
+        {
+            "word": "self-consistency",
+            "definition": "A technique where multiple outputs are generated and the most consistent one is selected based on certain criteria.",
+            "context": "selecting the best options utilizing self-consistency, which entails clustering candidates based on their execution outputs."
+        },
+        {
+            "word": "Text-to-SQL",
+            "definition": "A process or technology that converts natural language text into SQL queries.",
+            "context": "However, a single prompt design might not fully unleash the extensive Text-to-SQL knowledge of LLMs, and self-consistency methods might not be always effective."
+        },
+        {
+            "word": "self-consistency",
+            "definition": "A method that ensures consistency in the outputs of a model by generating multiple outputs and selecting the most consistent one.",
+            "context": "Building on the challenges outlined in the previous section, we propose novel approaches to improve LLM performance for Text-to-SQL by leveraging judiciously-designed test-time computations in an agentic framework."
+        },
+        {
+            "word": "agentic framework",
+            "definition": "A framework that involves the use of agents, which are entities that can perform actions autonomously, often used in AI to describe systems that can make decisions or perform tasks independently.",
+            "context": "Building on the challenges outlined in the previous section, we propose novel approaches to improve LLM performance for Text-to-SQL by leveraging judiciously-designed test-time computations in an agentic framework."
+        },
+        {
+            "word": "intrinsic knowledge",
+            "definition": "Knowledge that is inherent or built into a system, often referring to the pre-existing knowledge within a machine learning model.",
+            "context": "As indicated by the upper bound in Table 1, utilizing LLMs’ intrinsic knowledge offers significant potential for improvement."
+        },
+        {
+            "word": "scoring-based selection methods",
+            "definition": "Methods that select the best result from a set of candidates by assigning scores based on certain criteria and choosing the highest-scoring option.",
+            "context": "Achieving both high-quality and diverse candidate responses is critical for the success of scoring-based selection methods."
+        },
+        {
+            "word": "temperature",
+            "definition": "A parameter used in machine learning models, especially in natural language processing, to control the randomness of predictions. Higher temperatures result in more random outputs.",
+            "context": "While techniques like increasing temperature or reordering prompt contents can boost diversity, they often compromise the quality of the candidates."
+        },
+        {
+            "word": "divide-and-conquer algorithm",
+            "definition": "An algorithm design paradigm that solves a problem by breaking it down into smaller subproblems, solving each subproblem independently, and combining their solutions to solve the original problem.",
+            "context": "The first is inspired by the divide-and-conquer algorithm, which breaks down complex problems into smaller, manageable parts to handle difficult queries."
+        },
+        {
+            "word": "query execution-plan-based chain-of-thought strategy",
+            "definition": "A strategy that mimics the step-by-step process a database engine uses to execute a query, used to enhance reasoning in generating SQL queries.",
+            "context": "The second employs a query execution-plan-based chain-of-thought strategy, where the reasoning process mirrors the steps a database engine takes during query execution."
+        },
+        {
+            "word": "online synthetic example generation",
+            "definition": "A method of creating artificial examples in real-time to help a model understand data better, often used in machine learning to improve model training and performance.",
+            "context": "Lastly, we introduce a novel online synthetic example generation method, which helps the model better understand the underlying data schema of the test database."
+        },
+        {
+            "word": "selection agent",
+            "definition": "A component or model trained to choose the best option from a set of candidates, often using machine learning techniques to evaluate and compare options.",
+            "context": "To effectively select the best answer among candidates, we introduce a selection agent, trained with a classification objective, that assigns scores based on pairwise comparisons between candidate queries."
+        },
+        {
+            "word": "classification objective",
+            "definition": "A goal or target in machine learning where the task is to categorize or classify data into predefined classes or labels.",
+            "context": "To effectively select the best answer among candidates, we introduce a selection agent, trained with a classification objective, that assigns scores based on pairwise comparisons between candidate queries."
+        },
+        {
+            "word": "ensemble approach",
+            "definition": "A method in machine learning that combines multiple models or strategies to improve overall performance, leveraging the strengths of each component.",
+            "context": "By combining these candidate generation methods with the proposed scoring model, we create an ensemble approach that leverages the strengths of each strategy to significantly improve overall performance."
+        },
+        {
+            "word": "CHASE-SQL",
+            "definition": "A specific methodology or system designed to improve the performance of Text-to-SQL tasks, mentioned as achieving state-of-the-art results.",
+            "context": "We present comprehensive evaluations on the efficacy of proposed methodologies of CHASE-SQL."
+        },
+        {
+            "word": "execution accuracy",
+            "definition": "A measure of how accurately a system or model executes tasks or queries, often used in evaluating the performance of SQL query generation systems.",
+            "context": "Specifically, CHASE-SQL reaches an execution accuracy of 73.01% and 73.0% on the development set and test set of the challenging BIRD Text-to-SQL dataset."
+        },
+        {
+            "word": "sequence-to-sequence architectures",
+            "definition": "A type of neural network architecture where the input and output are both sequences, often used in tasks like translation or summarization.",
+            "context": "utilized sequence-to-sequence architectures, encoding user queries and database schemas using models such as Graph Neural Networks (GNNs), Recurrent Neural Networks (RNNs), Long Short-Term Memory (LSTM) networks, and pre-trained transformer encoders."
+        },
+        {
+            "word": "Graph Neural Networks (GNNs)",
+            "definition": "A type of neural network designed to work directly with the graph structure data.",
+            "context": "encoding user queries and database schemas using models such as Graph Neural Networks (GNNs)."
+        },
+        {
+            "word": "Recurrent Neural Networks (RNNs)",
+            "definition": "A class of neural networks where connections between nodes form a directed graph along a temporal sequence, allowing them to exhibit temporal dynamic behavior.",
+            "context": "encoding user queries and database schemas using models such as Graph Neural Networks (GNNs), Recurrent Neural Networks (RNNs)."
+        },
+        {
+            "word": "Long Short-Term Memory (LSTM) networks",
+            "definition": "A type of recurrent neural network capable of learning long-term dependencies, particularly in sequence prediction problems.",
+            "context": "encoding user queries and database schemas using models such as Graph Neural Networks (GNNs), Recurrent Neural Networks (RNNs), Long Short-Term Memory (LSTM) networks."
+        },
+        {
+            "word": "pre-trained transformer encoders",
+            "definition": "Transformers that have been pre-trained on a large corpus of text, which can then be fine-tuned for specific tasks.",
+            "context": "encoding user queries and database schemas using models such as Graph Neural Networks (GNNs), Recurrent Neural Networks (RNNs), Long Short-Term Memory (LSTM) networks, and pre-trained transformer encoders."
+        },
+        {
+            "word": "slot-filling",
+            "definition": "A natural language processing task where specific pieces of information are extracted from a text and assigned to predefined slots.",
+            "context": "On the decoding side, these systems employed either slot-filling or auto-regressive modelling approaches to construct the final SQL queries."
+        },
+        {
+            "word": "auto-regressive modelling",
+            "definition": "A type of model that predicts future data points based on past data points, often used in time series forecasting.",
+            "context": "On the decoding side, these systems employed either slot-filling or auto-regressive modelling approaches to construct the final SQL queries."
+        },
+        {
+            "word": "tabular language models",
+            "definition": "Models designed to handle and process tabular data, often used in conjunction with textual data.",
+            "context": "Additionally, tabular language models like TaBERT, TaPas, and Grappa have been developed to encode both tables and textual data effectively."
+        },
+        {
+            "word": "schema linking",
+            "definition": "A process in natural language processing that involves associating elements of a database schema with parts of a user query.",
+            "context": "Subsequent advancements have introduced more complex methodologies, including schema linking, self-correction or self-debugging, and self-consistency techniques."
+        },
+        {
+            "word": "self-correction or self-debugging",
+            "definition": "Techniques used in machine learning models to automatically identify and correct their own errors.",
+            "context": "Subsequent advancements have introduced more complex methodologies, including schema linking, self-correction or self-debugging, and self-consistency techniques."
+        },
+        {
+            "word": "self-consistency techniques",
+            "definition": "Methods used to ensure that a model's outputs are consistent with each other, often by comparing multiple outputs generated from the same input.",
+            "context": "Subsequent advancements have introduced more complex methodologies, including schema linking, self-correction or self-debugging, and self-consistency techniques."
+        },
+        {
+            "word": "locality-sensitive hashing (LSH)",
+            "definition": "An algorithmic technique that hashes input items so that similar items map to the same buckets with high probability.",
+            "context": "For each keyword, we employ locality-sensitive hashing (LSH) to retrieve the most syntactically-similar words, and re-rank them based on embedding-based similarity and edit distance."
+        },
+        {
+            "word": "embedding-based similarity",
+            "definition": "A measure of similarity between data points based on their embeddings, which are vector representations of the data.",
+            "context": "For each keyword, we employ locality-sensitive hashing (LSH) to retrieve the most syntactically-similar words, and re-rank them based on embedding-based similarity and edit distance."
+        },
+        {
+            "word": "edit distance",
+            "definition": "A way of quantifying how dissimilar two strings are by counting the minimum number of operations required to transform one string into the other.",
+            "context": "For each keyword, we employ locality-sensitive hashing (LSH) to retrieve the most syntactically-similar words, and re-rank them based on embedding-based similarity and edit distance."
+        },
+        {
+            "word": "Chain-of-Thought (CoT) prompting",
+            "definition": "A method to enhance reasoning in language models by conditioning their responses on a step-by-step chain of reasoning.",
+            "context": "Chain-of-Thought (CoT) prompting has been proposed to enhance LLMs’ reasoning abilities by conditioning their final responses on a step-by-step chain of reasoning."
+        },
+        {
+            "word": "LLM",
+            "definition": "Large Language Model, a type of artificial intelligence model designed to understand and generate human language.",
+            "context": "We employ two distinct reasoning methods and an online synthetic example generation approach."
+        },
+        {
+            "word": "pseudo-SQL",
+            "definition": "A simplified or abstract version of SQL used for illustrative purposes.",
+            "context": "We propose a CoT prompting approach that first decomposes the given question into smaller sub-problems using pseudo-SQL queries."
+        },
+        {
+            "word": "nested queries",
+            "definition": "SQL queries that are placed inside another SQL query, often used to perform complex data retrieval operations.",
+            "context": "This approach is particularly powerful handling complex scenarios that involve nested queries, e.g. intricate WHERE or HAVING conditions."
+        },
+        {
+            "word": "query optimizer",
+            "definition": "A component of a database management system that determines the most efficient way to execute a SQL query.",
+            "context": "When a SQL query is executed, the database management systems’ query optimizers translate the SQL text into a query plan."
+        },
+        {
+            "word": "EXPLAIN command",
+            "definition": "A SQL command used to obtain a detailed breakdown of the execution steps for a query.",
+            "context": "Query plans for any given SQL query can be obtained using the “EXPLAIN\" command, which provides a detailed breakdown of execution steps."
+        },
+        {
+            "word": "pretraining data",
+            "definition": "Data used to initially train a machine learning model before it is fine-tuned for specific tasks.",
+            "context": "Convert the output of “EXPLAIN\" command into a human-readable text format that aligns more closely with the pretraining data of LLMs."
+        },
+        {
+            "word": "schema",
+            "definition": "A structured framework or plan that outlines the organization of data in a database, including tables, columns, and relationships.",
+            "context": "It systematically explains which tables to scan, how to match columns, and how to apply filters."
+        },
+        {
+            "word": "synthetic",
+            "definition": "Artificially created or constructed, often to imitate or replicate something natural or real.",
+            "context": "We propose a synthetic demonstration generation strategy for Text-to-SQL."
+        },
+        {
+            "word": "LLM",
+            "definition": "Large Language Model, a type of artificial intelligence model designed to understand and generate human language.",
+            "context": "Algorithm 2 outlines the online synthetic example generation approach with two LLM generation steps."
+        },
+        {
+            "word": "predicates",
+            "definition": "Expressions in SQL that evaluate to true or false, used to filter data in queries.",
+            "context": "The SQL features include equality and non-equality predicates, single table and multi-table JOIN, nested JOIN, ORDER BY and LIMIT, GROUP BY and HAVING, various aggregation functions."
+        },
+        {
+            "word": "aggregation functions",
+            "definition": "SQL functions that perform a calculation on a set of values and return a single value, such as SUM, AVG, COUNT, etc.",
+            "context": "The SQL features include equality and non-equality predicates, single table and multi-table JOIN, nested JOIN, ORDER BY and LIMIT, GROUP BY and HAVING, various aggregation functions."
+        },
+        {
+            "word": "nested JOIN",
+            "definition": "A SQL operation where multiple JOINs are used within each other to combine rows from two or more tables based on related columns.",
+            "context": "The SQL features include equality and non-equality predicates, single table and multi-table JOIN, nested JOIN, ORDER BY and LIMIT, GROUP BY and HAVING, various aggregation functions."
+        },
+        {
+            "word": "self-reflection",
+            "definition": "A method where a system evaluates its own output to identify and correct errors.",
+            "context": "To address this, we apply an LLM-based query fixer that leverages the self-reflection method."
+        },
+        {
+            "word": "iterative",
+            "definition": "Involving repetition of a sequence of operations or steps to achieve a desired outcome.",
+            "context": "We continue this iterative fixing approach up to a specified number of attempts, β (set to three in this paper)."
+        },
+        {
+            "word": "SQL",
+            "definition": "Structured Query Language, a standardized programming language used for managing and manipulating databases.",
+            "context": "With three different methods for generating SQL queries, we can generate a set of candidate queries for any given question."
+        },
+        {
+            "word": "naive",
+            "definition": "Lacking sophistication or experience; simplistic.",
+            "context": "A naive approach would be to measure consistency among the candidates by executing them, grouping them based on their execution results."
+        },
+        {
+            "word": "algorithm",
+            "definition": "A step-by-step procedure or formula for solving a problem.",
+            "context": "Instead, we propose a more refined picking strategy, Algorithm 3, that relies on a selection agent."
+        },
+        {
+            "word": "selection agent",
+            "definition": "A component or model used to choose the best option from a set of alternatives based on specific criteria.",
+            "context": "This model θp can take k candidates and rank them based on how accurately each of them answers the given question."
+        },
+        {
+            "word": "classification objective",
+            "definition": "A goal or target in machine learning where the task is to categorize data into predefined classes.",
+            "context": "We set k = 2 and train a model with a classification objective to compare only two candidates at a time."
+        },
+        {
+            "word": "fine-tuning",
+            "definition": "The process of making small adjustments to a model to improve its performance on a specific task.",
+            "context": "Experiments with Gemini-1.5-pro showed that using the LLM without fine-tuning resulted in only 58.01% binary classification accuracy."
+        },
+        {
+            "word": "schema",
+            "definition": "The structure or organization of a database, defining how data is stored and accessed.",
+            "context": "Dij is the database schema used by both candidates."
+        },
+        {
+            "word": "binary classification",
+            "definition": "A type of classification task in machine learning where the goal is to categorize data into one of two classes.",
+            "context": "Using the LLM without fine-tuning resulted in only 58.01% binary classification accuracy."
+        },
+        {
+            "word": "tuple",
+            "definition": "An ordered list of elements, often used in mathematics and computer science.",
+            "context": "We create training examples in the form of tuples (Qu, Ci, Cj, Dij, yij)."
+        },
+        {
+            "word": "execution result",
+            "definition": "The output or outcome produced when a program or query is run.",
+            "context": "er(ci, D) as the execution result of ci on D."
+        },
+        {
+            "word": "schema_union",
+            "definition": "A process or function that combines the schemas of two or more database queries.",
+            "context": "Si,j ←schema_union(ci, cj, D) // Construct union of schemas used in ci and cj."
+        },
+        {
+            "word": "binary classifier",
+            "definition": "A binary classifier is a type of model in machine learning that categorizes elements of a given set into two groups based on a classification rule.",
+            "context": "Use binary classifier θp to select the winner, w ∈{i, j}"
+        },
+        {
+            "word": "pseudo-code",
+            "definition": "Pseudo-code is a high-level description of an algorithm or computer program, using the structural conventions of programming languages but intended for human reading rather than machine reading.",
+            "context": "In the pseudo-code for Algorithm 3, we begin by initializing a score of zero for each candidate query."
+        },
+        {
+            "word": "order bias",
+            "definition": "Order bias refers to a systematic error that occurs when the order of elements affects the outcome of a process, leading to skewed results.",
+            "context": "Then, for every distinct pair of queries (ci, cj), we compare both (ci, cj) and (cj, ci) to mitigate any order bias."
+        },
+        {
+            "word": "schema",
+            "definition": "In the context of databases, a schema is the structure that defines the organization of data, including tables, fields, relationships, and constraints.",
+            "context": "If the execution results differ, we generate a union of the schema used by both queries and use the binary classifier to determine which query is more likely to be correct."
+        }
+    ]
+}
