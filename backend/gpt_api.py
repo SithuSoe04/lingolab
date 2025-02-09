@@ -66,7 +66,7 @@ async def generate_definition(pdf_file: PDF_File):
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
-                {"role": "system", "content": "You are an amateur research assistant that analyzes text from documents to identify difficult or technical words and provide their definitions and context. Your output should be a structured list of words along with their definitions and context."},
+                {"role": "system", "content": "You are an amateur research assistant that analyzes text from documents to identify its scientific discipline, and identify difficult or technical words and provide their definitions and context. Your output should be a discipline identifier and a structured list of words along with their definitions and context."},
                 {"role": "user", "content": gpt_prompts.COMMON_PROMPT + f"""---Parsed PDF File Text: {pdf_file.pdf_string}---"""}
             ],
             tools=[
@@ -78,14 +78,14 @@ async def generate_definition(pdf_file: PDF_File):
                         "parameters": {
                             "type": "object",
                             "properties": {
-                                "type": {
+                                "discipline": {
                                     "type": "string",
-                                    "enum": ["data"],
-                                    "description": "The type of response, always 'data'."
+                                    "enum": ["mathematics", "chemistry", "physics", "computer science", "biology"],
+                                    "description": "The scientific discipline that the PDF belongs to. Must be exactly one of: mathematics, chemistry, physics, computer science, or biology."
                                 },
                                 "words": {
                                     "type": "array",
-                                    "description": "A list of objects containing difficult words, their definitions, and context.",
+                                    "description": "A list of words and phrases that may be technical, field-specific, or difficult for beginners, including standalone words from longer phrases. If a phrase has an abbreviation or contains a difficult standalone word, include both. Be inclusive and extract as many relevant terms as possible.",
                                     "items": {
                                         "type": "object",
                                         "properties": {
