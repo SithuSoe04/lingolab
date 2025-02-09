@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Box } from "@mui/material";
+import axios from "axios";
+import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ResearchList from '../ResearchList/ResearchList';
 
@@ -60,50 +61,50 @@ const styles = `
 `;
 
 const FileExplorer = () => {
-  const [pdfFile, setPdfFile] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const navigate = useNavigate(); // Hook to navigate to PdfViewer
+  const [uploading, setUploading] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const fileUrl = URL.createObjectURL(file);
-      setPdfFile(fileUrl);
-      navigate('/pdfviewer', { state: { pdfFile: fileUrl } });
+      setPdfFile(file);
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!pdfFile) return;
+
+    const formData = new FormData();
+    formData.append("file", pdfFile);
+
+    try {
+      setUploading(true);
+      const response = await axios.post("http://localhost:8000/upload-pdf/", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      console.log("Upload Successful:", response.data);
+
+      // Redirect to PdfViewer after successful upload
+      navigate("/pdfviewer", { state: { pdfFile: URL.createObjectURL(pdfFile), data: response.data }});
+
+    } catch (error: any) {
+      console.error("Upload failed:", error.response ? error.response.data : error.message);
+    } finally {
+      setUploading(false);
     }
   };
 
   return (
-    <>
-      <style>{styles}</style>
-      <Box className="file-upload-container">
-        <div className="upload-button-wrapper">
-          <button className="upload-button">
-            Upload File
-            <svg 
-              className="upload-icon" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-          </button>
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={handleFileChange}
-            className="file-input"
-          />
-        </div>
-        
-        <div className="divider" />
-        
-        <ResearchList />
-      </Box>
-    </>
+    <Box>
+      <input type="file" accept="application/pdf" onChange={handleFileChange} className="mb-4" />
+      {pdfFile && (
+        <Button onClick={handleUpload} disabled={uploading} variant="contained" color="primary">
+          {uploading ? "Uploading..." : "Upload & View"}
+        </Button>
+      )}
+    </Box>
   );
 };
 
