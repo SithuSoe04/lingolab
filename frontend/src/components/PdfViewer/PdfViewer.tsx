@@ -137,7 +137,27 @@ const PdfViewer = () => {
             return updatedWords;
           });
         } else {
-          alert('No definition found for this word.');
+          //alert('No definition found for this word.');
+          // If the word is not found, show a placeholder "Loading..."
+          setSelectedWords((prevWords) => [
+            { word: selectedText, definition: "Loading...", context: "" },
+            ...prevWords,
+          ]);
+
+          // Query OpenAI backend API for a new definition
+          const openAiResponse = await axios.get(`http://localhost:8000/generate-singular-definition/${documentType.toLowerCase()}/${selectedText}`);
+
+          const newDefinition = openAiResponse.data.definition;
+          const newContext = openAiResponse.data.context;
+
+          // Update the UI with the actual definition
+          setSelectedWords((prevWords) =>
+              prevWords.map((wordObj) =>
+                  wordObj.word === selectedText
+                      ? { word: selectedText, definition: newDefinition, context: newContext }
+                      : wordObj
+              )
+          );
         }
       } catch (error) {
         console.error("Error fetching vocabulary data:", error);
