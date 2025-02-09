@@ -48,12 +48,10 @@ const PdfViewer = () => {
             { word: selectedText, definition: "Loading...", context: "" },
             ...prevWords,
           ]);
-
           // Query OpenAI backend API for a new definition
           const openAiResponse = await axios.get(`http://localhost:8000/generate-singular-definition/${documentType.toLowerCase()}/${selectedText}`);
-
-          const newDefinition = openAiResponse.data.definition;
-          const newContext = openAiResponse.data.context;
+          const newDefinition = openAiResponse.data.words[0].definition;
+          const newContext = openAiResponse.data.words[0].context;
 
           setSelectedWords((prevWords) =>
             prevWords.map((wordObj) =>
