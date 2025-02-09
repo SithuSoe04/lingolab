@@ -49,7 +49,9 @@ const PdfViewer = () => {
             ...prevWords,
           ]);
 
+          // Query OpenAI backend API for a new definition
           const openAiResponse = await axios.get(`http://localhost:8000/generate-singular-definition/${documentType.toLowerCase()}/${selectedText}`);
+
           const newDefinition = openAiResponse.data.definition;
           const newContext = openAiResponse.data.context;
 
@@ -133,5 +135,4 @@ const PdfViewer = () => {
     </Box>
   );
 };
-
 export default PdfViewer;

@@ -223,8 +223,8 @@ async def generate_singular_definition(field_type: str, search_term: str):
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
-                {"role": "system", "content": "You are an science expert that provides definitions for words with respect to a scientific discipline to amateur readers of scientific literature. If the word is not relevant to the given discipline, return \"The word is not relevant to the given discipline\" as the definition."},
-                {"role": "user", "content": f"""Provide a concise definition for the word \"{search_term}\" with respect to the {field_type} discipline. If the word is not relevant to the given discipline, return \"The word is not relevant to the given discipline\" as the definition."""}
+                {"role": "system", "content": "You are an science expert that provides definitions for words with respect to a scientific discipline to amateur readers of scientific literature. If the word is not a real word, return \"The word is not a real word.\" as the definition."},
+                {"role": "user", "content": f"""Provide a concise definition for the word \"{search_term}\" with respect to the {field_type} discipline. If the word is not a real word, return \"The word is not a real word.\" as the definition."""}
             ],
             tools=[
                 {
@@ -237,7 +237,7 @@ async def generate_singular_definition(field_type: str, search_term: str):
                             "properties": {
                                 "definition": {
                                     "type": "string",
-                                    "description": "The definition of the word. **Must be the string \"The word is not relevant to the given discipline\" if the word is not specifically relevant to the given scientific discipline.**"
+                                    "description": "The definition of the word. **Must be the string \"The word is not a real word.\" if the word is not a real word.**"
                                 }
                             },
                             "required": ["definition"]
@@ -256,8 +256,9 @@ async def generate_singular_definition(field_type: str, search_term: str):
     logger.info(f"OpenAI Raw Response: {response}")
 
     response = json.loads(response.choices[0].message.tool_calls[0].function.arguments)
-    definition = response["response"].get("definition")
-    dataObject = {"type": field_type, "words": { "word": search_term, "definition": definition, "context": "Currently unavailable" }}
+    logger.info(response)
+    definition = response.get("definition")
+    dataObject = {"type": field_type, "words": [{ "word": search_term, "definition": definition, "context": "Currently unavailable" }]}
     upload_vocabulary_data(dataObject)
     return dataObject
 

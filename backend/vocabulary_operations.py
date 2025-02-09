@@ -116,7 +116,10 @@ def search_vocabulary_in_field(field_type, search_term):
         docs = db.collection(field_type).stream()
         
         results = []
-        search_term_lower = search_term.lower()
+        search_term_lower = search_term.lower().strip()
+        if not search_term_lower:  # Ensure empty or space-only searches return no results
+            return []
+
         for doc in docs:
             data = doc.to_dict()
             if search_term_lower in data['searchableWord']:
