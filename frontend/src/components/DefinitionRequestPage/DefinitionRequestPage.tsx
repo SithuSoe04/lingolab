@@ -1,67 +1,101 @@
-// DefinitionRequestPage.tsx
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './DefinitionRequestPage.css';
 
-// Dummy data for demonstration
-const DUMMY_DEFINITION_DATA = {
-  word: "Mitochondria",
-  definition: "A double-membrane-bound organelle found in most eukaryotic organisms. Mitochondria are often referred to as the powerhouses of the cell because they generate most of the cell's supply of adenosine triphosphate (ATP), used as a source of chemical energy.",
-  context: "In cellular biology, mitochondria play a crucial role in energy production and are essential for cellular respiration. Their presence or absence often distinguishes between different types of cells.",
-  fieldType: "biology",
-  upvotes: 125,
-  downvotes: 12
-};
+interface DefinitionData {
+  word: string;
+  definition: string;
+  context?: string;
+  fieldType: string;
+  upvotes: number;
+  downvotes: number;
+}
 
 const DefinitionRequestPage: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [definitionData, setDefinitionData] = useState<DefinitionData | null>(null);
   const [newDefinition, setNewDefinition] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async () => {
-    if (!newDefinition.trim()) return;
+  useEffect(() => {
+    // Get definition data from location state
+    const data = location.state?.definitionData;
+    if (data) {
+      setDefinitionData(data);
+    } else {
+      // Redirect back if no data
+      navigate('/');
+    }
+  }, [location, navigate]);
 
+  const handleSubmit = async () => {
+    if (!definitionData || !newDefinition.trim()) return;
+  
     setIsSubmitting(true);
     try {
-      // Simulate API call with setTimeout
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      alert('Definition change request submitted successfully!');
-      navigate('/');
-    } catch (error) {
+      const response = await fetch('http://localhost:8000/submit-definition-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          word: definitionData.word,
+          currentDefinition: definitionData.definition,
+          newDefinition: newDefinition.trim(),
+          fieldType: definitionData.fieldType,
+          currentUpvotes: definitionData.upvotes,
+          currentDownvotes: definitionData.downvotes,
+        }),
+      });
+  
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message); // Show success message
+        navigate('/');
+      } else {
+        throw new Error(result.detail || 'Failed to submit request');
+      }
+    } catch (error:any) {
       console.error('Error submitting request:', error);
-      alert('Failed to submit definition change request. Please try again.');
+      alert(error.message || 'Failed to submit definition change request. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  if (!definitionData) {
+    return <div className="loading">Loading...</div>;
+  }
+
   return (
     <div className="definition-request-page">
       <h1 className="page-title">Definition Change Request</h1>
       
+      {/* Current Definition Card */}
       <div className="definition-card">
-        <h2 className="word-title">{DUMMY_DEFINITION_DATA.word}</h2>
+        <h2 className="word-title">{definitionData.word}</h2>
         
         <div className="definition-section">
           <h3 className="section-label">/Definition/</h3>
-          <p className="definition-text">{DUMMY_DEFINITION_DATA.definition}</p>
+          <p className="definition-text">{definitionData.definition}</p>
         </div>
         
-        <div className="context-section">
-          <h3 className="section-label">/Context/</h3>
-          <p className="context-text">{DUMMY_DEFINITION_DATA.context}</p>
-        </div>
+        {definitionData.context && (
+          <div className="context-section">
+            <h3 className="section-label">/Context/</h3>
+            <p className="context-text">{definitionData.context}</p>
+          </div>
+        )}
         
         <div className="voting-section">
           <span className="vote-count">
-            <span>{DUMMY_DEFINITION_DATA.upvotes}</span>
-          </span>
-          <span className="vote-count">
-            <span>{DUMMY_DEFINITION_DATA.downvotes}</span>
+
           </span>
         </div>
       </div>
 
+      {/* New Definition Form */}
       <div className="request-form">
         <h3 className="form-title">Write Definition Change Below</h3>
         <textarea

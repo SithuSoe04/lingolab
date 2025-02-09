@@ -60,12 +60,10 @@ def submit_definition_request(word, current_definition, new_definition, field_ty
         doc = doc_ref.get()
         
         if doc.exists and doc.to_dict().get('status') == 'pending':
-            print(f"A pending request for '{word}' in {field_type} already exists.")
             return False
             
         # Add the new request
         doc_ref.set(request_data)
-        print(f"Successfully submitted definition change request for '{word}'")
         return True
         
     except Exception as error:
@@ -91,7 +89,6 @@ def process_definition_request(request_id, approve=True):
         request_data = request_doc.to_dict()
         
         if request_data['status'] != 'pending':
-            print(f"Request {request_id} has already been {request_data['status']}")
             return False
         
         new_status = 'approved' if approve else 'rejected'
@@ -106,11 +103,9 @@ def process_definition_request(request_id, approve=True):
                 'definition': request_data['proposed_definition'],
                 'last_updated': datetime.now()
             })
-            print(f"Updated definition for {request_data['word']}")
         
  # Delete the request document after processing
         request_ref.delete()
-        print(f"Request {request_id} has been {'approved' if approve else 'rejected'} and deleted.")
         return True
         
     except Exception as error:
