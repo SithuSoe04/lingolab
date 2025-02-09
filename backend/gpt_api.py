@@ -214,6 +214,54 @@ async def get_vocabulary_by_field(field_type: str):
         logger.error(f"Error retrieving vocabulary for {field_type}: {e}")
         raise HTTPException(status_code=500, detail="Error retrieving vocabulary data.")
 
+
+
+##I want a route that calls gptapi to check whether or not its a singular
+@app.get("/generate-singular-definition/{field_type}/{search_term}")
+async def generate_singular_definition(field_type: str, search_term: str):
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": "You are an science expert that provides definitions for words with respect to a scientific discipline to amateur readers of scientific literature. If the word is not relevant to the given discipline, return \"The word is not relevant to the given discipline\" as the definition."},
+                {"role": "user", "content": f"""Provide a concise definition for the word \"{search_term}\" with respect to the {field_type} discipline. If the word is not relevant to the given discipline, return \"The word is not relevant to the given discipline\" as the definition."""}
+            ],
+            tools=[
+                {
+                    "type": "function",
+                    "function": {
+                        "name": "provide_definition",
+                        "description": "Provides concise definition for a word in respect to a given scientific discipline.",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "definition": {
+                                    "type": "string",
+                                    "description": "The definition of the word. **Must be the string \"The word is not relevant to the given discipline\" if the word is not specifically relevant to the given scientific discipline.**"
+                                }
+                            },
+                            "required": ["definition"]
+                        }
+                    }
+                }
+            ],
+            temperature=0.3
+        )
+    except openai.OpenAIError as e:
+        logger.error(f"OpenAI API error: {e}")
+        raise HTTPException(status_code=500, detail="Error with OpenAI API")
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+    logger.info(f"OpenAI Raw Response: {response}")
+
+    response = json.loads(response.choices[0].message.tool_calls[0].function.arguments)
+    definition = response["response"].get("definition")
+    dataObject = {"type": field_type, "words": { "word": search_term, "definition": definition, "context": "Currently unavailable" }}
+    upload_vocabulary_data(dataObject)
+    return dataObject
+
+
 @app.post("/process-definition-request/{request_id}/{approve}")
 async def process_definition_request_api(request_id: str, approve: bool):
     """Endpoint to approve or reject a definition change request."""
