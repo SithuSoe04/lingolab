@@ -1,0 +1,45 @@
+.research-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+  
+  .research-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .research-list {
+    background-color: #e5e5e5;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .research-button {
+    width: 100%;
+    text-align: left;
+    padding: 16px 24px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    background-color: #d1d1d1;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .research-button:hover {
+    background-color: #a3a3a3;
+  }
+  
+  .research-button:not(:last-child) {
+    border-bottom: 1px solid #e5e5e5;
+  }
+  
+  /* Optional: Add focus styles for accessibility */
+  .research-button:focus {
+    outline: 2px solid #666;
+    outline-offset: -2px;
+  }
