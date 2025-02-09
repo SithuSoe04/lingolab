@@ -1,16 +1,18 @@
 import React from 'react';
-import { Card, CardContent, CardHeader } from '@mui/material';
+import { Card, CardContent, CardHeader, Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import VoteButtons from '../VoteButtons/VoteButtons';
+import axios from 'axios';
 
 interface DefinitionCardProps {
+  id: string;
   word: string;
   oldDefinition: string;
   newDefinition: string;
   upvotes: number;
   downvotes: number;
+  refreshRequests: () => void;
 }
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -22,10 +24,25 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 const DefinitionCard: React.FC<DefinitionCardProps> = ({ 
+  id, 
   word, 
   oldDefinition, 
-  newDefinition
+  newDefinition,
+  refreshRequests
 }) => {
+  const handleApproveReject = async (approve: boolean) => {
+    try {
+      const response = await axios.post(`http://localhost:8000/process-definition-request/${id}/${approve}`);
+      if (response.data.status === "success") {
+        alert(`Request ${id} processed successfully.`);
+        refreshRequests(); // Refresh the list of requests
+      }
+    } catch (error) {
+      console.error("Error processing request:", error);
+      alert("Failed to process the request.");
+    }
+  };
+
   return (
     <StyledCard>
       <CardHeader
@@ -57,7 +74,21 @@ const DefinitionCard: React.FC<DefinitionCardProps> = ({
         </Box>
 
         <Box sx={{ mt: 2 }}>
-          <VoteButtons />
+          <Button 
+            variant="contained" 
+            color="success" 
+            sx={{ mr: 2 }}
+            onClick={() => handleApproveReject(true)}
+          >
+            Approve
+          </Button>
+          <Button 
+            variant="contained" 
+            color="error"
+            onClick={() => handleApproveReject(false)}
+          >
+            Reject
+          </Button>
         </Box>
       </CardContent>
     </StyledCard>
