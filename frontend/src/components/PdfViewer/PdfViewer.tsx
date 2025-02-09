@@ -98,7 +98,7 @@ const PdfViewer = () => {
     e.preventDefault();
     const selectedText = window.getSelection()?.toString().trim().toLowerCase();
     if (selectedText) {
-      const wordEntry = wordDefinitions.find((entry: { word: string; }) => entry.word === selectedText);
+      // const wordEntry = wordDefinitions.find((entry: { word: string; }) => entry.word === selectedText);
       // if (wordEntry) {
       //   setSelectedWords((prevWords) => {
       //     const updatedWords = [wordEntry, ...prevWords]; // Add the selected word at the beginning
@@ -137,7 +137,27 @@ const PdfViewer = () => {
             return updatedWords;
           });
         } else {
-          alert('No definition found for this word.');
+          //alert('No definition found for this word.');
+          // If the word is not found, show a placeholder "Loading..."
+          setSelectedWords((prevWords) => [
+            { word: selectedText, definition: "Loading...", context: "" },
+            ...prevWords,
+          ]);
+
+          // Query OpenAI backend API for a new definition
+          const openAiResponse = await axios.get(`http://localhost:8000/generate-singular-definition/${documentType.toLowerCase()}/${selectedText}`);
+
+          const newDefinition = openAiResponse.data.definition;
+          const newContext = openAiResponse.data.context;
+
+          // Update the UI with the actual definition
+          setSelectedWords((prevWords) =>
+              prevWords.map((wordObj) =>
+                  wordObj.word === selectedText
+                      ? { word: selectedText, definition: newDefinition, context: newContext }
+                      : wordObj
+              )
+          );
         }
       } catch (error) {
         console.error("Error fetching vocabulary data:", error);
