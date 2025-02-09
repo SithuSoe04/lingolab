@@ -6,7 +6,7 @@ You are given a parsed PDF file text of a piece of scientific literature. Identi
 
 TASK_BREAKDOWN = """---
 TASK BREAKDOWN: 
-Identify all the difficult words and phrases; specifically, phrases that are uncommon, hard to understand, not self-explanatory, or technical terms. 
+Identify all the difficult words; specifically, words that are hard to understand, or are technical terms. 
 Then, for each word, provide:
 - Its definition.
 - A **detailed explanation** of how it relates to the topic of the paper.
