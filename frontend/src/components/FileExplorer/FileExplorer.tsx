@@ -28,7 +28,7 @@ const FileExplorer = () => {
       });
 
       console.log("Upload Successful:", response.data);
-      
+
       // Redirect to PdfViewer after successful upload
       navigate("/pdfviewer", { state: { pdfFile: URL.createObjectURL(pdfFile), uploadData: response.data }});
 

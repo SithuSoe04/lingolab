@@ -1,12 +1,12 @@
 OVERALL_TASK_INSTRUCTIONS = """---
 TASK OVERVIEW:
-You are given a parsed PDF file text of a piece of scientific literature. Identify all the difficult words and provide a definition and contextual explanation.
+You are given a parsed PDF file text of a piece of scientific literature. Identify all the difficult or technical words and provide a definition and contextual explanation.
 ---
 """
 
 TASK_BREAKDOWN = """---
 TASK BREAKDOWN: 
-Identify all the difficult words and phrases; specifically, phrases that are uncommon, hard to understand, not self-explanatory, or technical terms. 
+Identify all the difficult or technical words; specifically, words that are hard to understand, or are technical terms. 
 Then, for each word, provide:
 - Its definition.
 - A **detailed explanation** of how it relates to the topic of the paper.
