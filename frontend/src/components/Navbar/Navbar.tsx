@@ -146,9 +146,9 @@ const pages = [
 
 function Navbar() {
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl" sx={{backgroundColor: "#F9F8F4"}}>
-        <Toolbar disableGutters>
+    <AppBar position="static" sx={{width: '100%'}}>
+      <Container maxWidth={false} sx={{backgroundColor: "#F9F8F4", margin: '0', width: '100%', }}>
+        <Toolbar disableGutters sx={{width: '100%'}}>
         <Link to="/">
           <img style={{ maxHeight: "50px" }} src={LingoLabLogo}></img>
         </Link>
