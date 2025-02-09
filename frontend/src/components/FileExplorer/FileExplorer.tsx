@@ -30,7 +30,7 @@ const FileExplorer = () => {
       console.log("Upload Successful:", response.data);
 
       // Redirect to PdfViewer after successful upload
-      navigate("/pdfviewer", { state: { pdfFile: URL.createObjectURL(pdfFile), uploadData: response.data }});
+      navigate("/pdfviewer", { state: { pdfFile: URL.createObjectURL(pdfFile), data: response.data }});
 
     } catch (error: any) {
       console.error("Upload failed:", error.response ? error.response.data : error.message);

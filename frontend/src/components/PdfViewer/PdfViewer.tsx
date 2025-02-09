@@ -119,7 +119,7 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 const PdfViewer = () => {
   const location = useLocation();
   const pdfFile = location.state?.pdfFile;
-  const wordDefinitions = location.state?.data.words; // Assuming the word definitions are passed in 'data.words'
+  const wordDefinitions = location.state?.data.words; 
 
   const [selectedWords, setSelectedWords] = useState<{ word: string, definition: string, context: string }[]>([]); 
   const viewerRef = useRef<any>(null);
