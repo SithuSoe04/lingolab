@@ -1,0 +1,89 @@
+/* General Navbar styles */
+.navbar {
+    background-color: #333;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+  }
+  
+  .logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .menu-icon {
+    display: none;
+    cursor: pointer;
+  }
+  
+  .menu-icon-line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+  }
+  
+  /* Navigation links */
+  .nav-links ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links li {
+    margin-left: 20px;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Mobile Menu */
+  @media (max-width: 768px) {
+    .menu-icon {
+      display: block;
+    }
+  
+    .nav-links {
+      display: none;
+      width: 100%;
+      background-color: #333;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      text-align: center;
+      padding: 20px 0;
+    }
+  
+    .nav-links.active {
+      display: block;
+    }
+  
+    .nav-links ul {
+      display: block;
+    }
+  
+    .nav-links li {
+      margin: 10px 0;
+    }
+  }
+  

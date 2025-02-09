@@ -1,7 +1,8 @@
 #### This file contains OpenAI API call
 #### for functionality
 #### 
-#### uvicorn gpt_api:app --reload
+#### uvicorn gpt_api:app --reload --host 0.0.0.0 --port 8000
+
 
 
 from fastapi import FastAPI, HTTPException, UploadFile, File
@@ -12,6 +13,10 @@ import fitz
 import logging
 from fastapi.middleware.cors import CORSMiddleware
 import gpt_prompts
+import json
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 app = FastAPI()
@@ -28,7 +33,7 @@ app.add_middleware(
 )
 
 # OpenAI API Key (load from env variables)
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Configure Logging
 logging.basicConfig(level=logging.INFO)
@@ -58,7 +63,7 @@ def chunk_text(text, chunk_size=4000):
 @app.post("/generate/")
 async def generate_definition(pdf_file: PDF_File):
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are an AI assistant that analyzes text from documents to identify difficult words and provide their definitions and context. Your output should be a structured list of words along with their definitions and context."},
@@ -110,13 +115,17 @@ async def generate_definition(pdf_file: PDF_File):
         
 
         )
-    except openai.error.OpenAIError as e:
+    except openai.OpenAIError as e:
         logger.error(f"OpenAI API error: {e}")
         raise HTTPException(status_code=500, detail="Error with OpenAI API")
     except Exception as e:
         logger.error(f"Unexpected error: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
-    return {"response": response["choices"][0]["message"]["content"]}
+    logger.info(f"OpenAI Raw Response: {response}")
+
+    function_response = json.loads(response.choices[0].message.tool_calls[0].function.arguments)
+    return {"response": function_response}
+
 
 
 @app.post("/upload-pdf/")
@@ -129,18 +138,25 @@ async def upload_pdf(file: UploadFile = File(...)):
 
         # Chunk text if too long
         chunks = chunk_text(extracted_text)
-        results = []
+        
+        all_words = [] 
 
-        # Process each chunk with OpenAI
         for chunk in chunks:
             response = await generate_definition(PDF_File(pdf_string=chunk))
-            results.append(response["response"])
 
-        return {"hard_words": results}
+            if response and response["response"]:
+                words = response["response"].get("words", [])  # Extract words
+                all_words.extend(words)  # ✅ Merge words into a single list
+            else:
+                logger.warning(f"Skipping empty response for chunk: {chunk[:100]}...")
+
+        if not all_words:
+            raise HTTPException(status_code=500, detail="No valid words found in PDF.")
+        logger.info("====="*8)
+        logger.info("====="*8)
+        logger.info("====="*8)
+        return {"type": "data", "words": all_words}
 
     except Exception as e:
         logger.error(f"File upload error: {e}")
         raise HTTPException(status_code=500, detail="Error processing uploaded PDF")
-
-    
-    
